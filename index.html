@@ -1,0 +1,594 @@
+<!DOCTYPE html><html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NexialBusiness — Criação de Produtos e Negócios</title>
+  <meta name="description" content="NexialBusiness.com — formação interdisciplinar para empreendedores, inovadores e criadores que desejam desenvolver produtos, serviços, negócios e novos mercados." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #04101d;
+      --bg-2: #07182a;
+      --panel: rgba(255,255,255,0.06);
+      --panel-2: rgba(255,255,255,0.09);
+      --line: rgba(255,255,255,0.12);
+      --text: #f3f7ff;
+      --muted: #b7c6da;
+      --cyan: #4ad8ff;
+      --green: #66efc2;
+      --gold: #f0c15a;
+      --shadow: 0 20px 60px rgba(0,0,0,0.32);
+      --radius: 24px;
+      --max: 1260px;
+    }* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 10% 10%, rgba(74,216,255,0.14), transparent 20%),
+    radial-gradient(circle at 85% 0%, rgba(240,193,90,0.08), transparent 18%),
+    radial-gradient(circle at 50% 50%, rgba(102,239,194,0.05), transparent 28%),
+    linear-gradient(180deg, #04101d 0%, #061524 36%, #08192b 100%);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(circle at center, black 35%, transparent 85%);
+  opacity: .55;
+}
+
+a { color: inherit; text-decoration: none; }
+.container { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; }
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(14px);
+  background: rgba(4,16,29,0.76);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 18px 0; }
+.brand { display: flex; flex-direction: column; gap: 4px; }
+.brand strong { font-size: 1.2rem; letter-spacing: .06em; }
+.brand span { color: var(--muted); font-size: .95rem; }
+.nav-links { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; color: var(--muted); font-size: .96rem; }
+
+.btn, .btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 26px;
+  border-radius: 999px;
+  font-weight: 800;
+  transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after, .btn-outline::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-120%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+  transition: transform .6s ease;
+}
+
+.btn:hover::after, .btn-outline:hover::after { transform: translateX(120%); }
+.btn:hover, .btn-outline:hover { transform: translateY(-2px); }
+.btn { background: linear-gradient(135deg, var(--cyan), var(--green)); color: #04101d; }
+.btn-outline { background: rgba(255,255,255,0.05); border: 1px solid var(--line); color: var(--text); }
+
+.hero { padding: 72px 0 40px; position: relative; }
+.hero-orb { position: absolute; border-radius: 50%; filter: blur(24px); opacity: .45; animation: float 8s ease-in-out infinite; }
+.orb-1 { width: 240px; height: 240px; background: rgba(74,216,255,0.16); top: 20px; left: -60px; }
+.orb-2 { width: 280px; height: 280px; background: rgba(240,193,90,0.10); top: 80px; right: -80px; animation-delay: 1.5s; }
+.orb-3 { width: 180px; height: 180px; background: rgba(102,239,194,0.12); bottom: 20px; left: 40%; animation-delay: .8s; }
+
+@keyframes float { 0%,100% { transform: translateY(0px) translateX(0px); } 50% { transform: translateY(-18px) translateX(10px); } }
+
+.hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; position: relative; z-index: 2; }
+
+.glass, .hero-card, .feature-card, .catalog-card, .pricing-card, .story-card, .faq-item, .cta-panel {
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) + 4px);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.hero-card, .glass { position: relative; overflow: hidden; }
+.hero-card::before, .glass::before, .feature-card::before, .catalog-card::before, .pricing-card::before, .cta-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(74,216,255,0.12), transparent 24%);
+  pointer-events: none;
+}
+
+.hero-main { padding: 36px; }
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(74,216,255,0.12);
+  border: 1px solid rgba(74,216,255,0.26);
+  color: #8ee6ff;
+  font-size: .9rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+h1 { margin: 0; font-size: clamp(2.55rem, 5.6vw, 5.6rem); line-height: .96; letter-spacing: -0.06em; }
+.title-accent { color: var(--gold); }
+.subtitle { margin: 24px 0 0; font-size: 1.16rem; color: var(--muted); max-width: 860px; }
+
+.impact-quote {
+  margin-top: 24px;
+  padding: 18px 22px;
+  border-radius: 18px;
+  border: 1px solid rgba(240,193,90,0.3);
+  background: rgba(240,193,90,0.06);
+  font-size: 1.12rem;
+  font-weight: 700;
+}
+.impact-quote strong { color: var(--gold); }
+
+.hero-points { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; margin: 24px 0 30px; }
+.point { border: 1px solid var(--line); border-radius: 18px; padding: 16px; background: rgba(255,255,255,0.04); color: var(--muted); transition: transform .25s ease, border-color .25s ease; }
+.point:hover { transform: translateY(-4px); border-color: rgba(74,216,255,0.24); }
+.hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 4px; }
+
+.hero-side { padding: 24px; display: grid; gap: 16px; align-content: start; }
+.side-card { padding: 22px; border: 1px solid var(--line); border-radius: 20px; background: rgba(255,255,255,0.04); transition: transform .25s ease; }
+.side-card:hover { transform: translateY(-4px); }
+.side-card h3 { margin: 0 0 8px; font-size: 1.75rem; line-height: 1; color: var(--gold); }
+.side-card p { margin: 0; color: var(--muted); }
+
+.section { padding: 42px 0; position: relative; z-index: 2; }
+.section-head { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+.section-head h2 { margin: 0; font-size: clamp(2rem, 4vw, 3.3rem); line-height: 1.02; letter-spacing: -0.05em; }
+.section-head p { margin: 0; max-width: 920px; font-size: 1.08rem; color: var(--muted); }
+
+.features-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; }
+.feature-card { position: relative; padding: 26px; overflow: hidden; transition: transform .28s ease, border-color .28s ease; }
+.feature-card:hover { transform: translateY(-6px); border-color: rgba(74,216,255,0.26); }
+.feature-index { display: inline-flex; width: 46px; height: 46px; align-items: center; justify-content: center; border-radius: 14px; background: rgba(74,216,255,0.14); color: #9be8ff; font-weight: 800; margin-bottom: 18px; }
+.feature-card h3 { margin: 0 0 10px; font-size: 1.3rem; }
+.feature-card p { margin: 0; color: var(--muted); font-size: 1rem; }
+
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.tag { padding: 8px 11px; border-radius: 999px; background: rgba(255,255,255,0.04); border: 1px solid var(--line); color: var(--muted); font-size: .84rem; }
+
+.story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.story-card { padding: 28px; transition: transform .25s ease; }
+.story-card:hover { transform: translateY(-5px); }
+.story-card h3 { margin: 0 0 12px; font-size: 1.45rem; color: var(--gold); }
+.story-card p { margin: 0; color: var(--muted); }
+
+.catalog-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; }
+.catalog-card { position: relative; padding: 26px; overflow: hidden; transition: transform .28s ease, border-color .28s ease; }
+.catalog-card:hover { transform: translateY(-6px); border-color: rgba(240,193,90,0.22); }
+.catalog-card h3 { margin: 0 0 10px; font-size: 1.35rem; color: var(--text); }
+.catalog-card p { margin: 0 0 14px; color: var(--muted); }
+.catalog-card ul { margin: 0; padding-left: 20px; color: var(--muted); }
+.catalog-card li { margin: 8px 0; }
+
+.method-banner { padding: 28px; border-radius: 26px; border: 1px solid rgba(240,193,90,0.25); background: linear-gradient(135deg, rgba(240,193,90,0.08), rgba(74,216,255,0.06)); margin-bottom: 20px; font-size: 1.08rem; color: var(--text); }
+.method-banner strong { color: var(--gold); }
+
+.pricing-wrap { display: grid; grid-template-columns: 1.15fr .85fr; gap: 20px; }
+.pricing-card { position: relative; padding: 30px; overflow: hidden; }
+.pricing-card h3 { margin: 0 0 12px; font-size: 1.7rem; }
+.price-main { display: flex; align-items: flex-end; gap: 14px; flex-wrap: wrap; margin: 18px 0 8px; }
+.price-main .big { font-size: clamp(3rem, 7vw, 5.5rem); line-height: .9; letter-spacing: -0.06em; font-weight: 900; color: var(--gold); }
+.price-main .small { font-size: 1.15rem; color: var(--muted); font-weight: 700; }
+.price-note { color: var(--muted); font-size: 1.05rem; margin-bottom: 18px; }
+.price-list { margin: 0; padding-left: 18px; color: var(--muted); }
+.price-list li { margin: 10px 0; }
+
+.faq { display: grid; gap: 14px; }
+.faq-item { padding: 20px 22px; transition: transform .25s ease; }
+.faq-item:hover { transform: translateY(-4px); }
+.faq-item h4 { margin: 0 0 8px; font-size: 1.08rem; }
+.faq-item p { margin: 0; color: var(--muted); }
+
+.cta-panel { position: relative; padding: 34px; overflow: hidden; text-align: center; }
+.cta-panel h2 { margin: 0 0 12px; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.03; letter-spacing: -0.04em; }
+.cta-panel p { margin: 0 auto 20px; max-width: 840px; color: var(--muted); font-size: 1.08rem; }
+.cta-actions { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
+
+.ticker { margin-top: 24px; display: flex; gap: 14px; overflow: hidden; white-space: nowrap; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 14px 0; color: #d7e3f4; font-weight: 700; }
+.ticker-track { display: flex; gap: 28px; min-width: max-content; animation: marquee 28s linear infinite; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .75s ease, transform .75s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+.disclaimer { margin-top: 18px; padding: 14px 16px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); color: var(--muted); font-size: .93rem; }
+footer { padding: 42px 0 60px; color: var(--muted); font-size: .95rem; }
+
+@media (max-width: 1080px) { .hero-grid, .features-grid, .catalog-grid, .story-grid, .pricing-wrap { grid-template-columns: 1fr; } }
+@media (max-width: 760px) {
+  .nav { flex-direction: column; align-items: flex-start; }
+  .nav-links { gap: 12px; }
+  .hero-main, .hero-side, .feature-card, .catalog-card, .pricing-card, .story-card, .cta-panel { padding: 22px; }
+  .hero-points { grid-template-columns: 1fr; }
+  h1 { font-size: 2.5rem; }
+  .price-main .big { font-size: 3.8rem; }
+}
+
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container nav">
+      <div class="brand">
+        <strong>NEXIALBUSINESS</strong>
+        <span>Criação de Produtos e Negócios</span>
+      </div>
+      <div class="nav-links">
+        <a href="#diferencial">Diferencial</a>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#metodo">Método</a>
+        <a href="#precos">Preço</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn" href="https://wa.me/5591980144854" target="_blank" rel="noopener">Fale agora</a>
+      </div>
+    </div>
+  </div>  <header class="hero">
+    <div class="hero-orb orb-1"></div>
+    <div class="hero-orb orb-2"></div>
+    <div class="hero-orb orb-3"></div>
+    <div class="container hero-grid">
+      <div class="hero-card hero-main reveal">
+        <div class="eyebrow">NEXIALBUSINESS • EMPREENDEDORISMO • INOVAÇÃO • PRODUTOS • NEGÓCIOS</div>
+        <h1>Crie produtos e negócios.<br><span class="title-accent">Mesmo sem ser da área.</span></h1>
+        <p class="subtitle">Uma formação interdisciplinar para empreendedores, inovadores e criadores que querem transformar conhecimento em produtos, serviços, negócios, projetos e novos mercados.</p>
+        <div class="impact-quote">Conhecimento parado não muda sua vida. <strong>Conhecimento conectado pode virar produto, negócio e oportunidade.</strong></div>
+        <div class="hero-points">
+          <div class="point">Método para enxergar oportunidades em áreas complexas e transformar ideias em ofertas, soluções e negócios.</div>
+          <div class="point">Integra medicina, engenharia, IA, economia, direito, administração, biotecnologia, agro e tecnologia sob lógica empreendedora.</div>
+          <div class="point">Formação para quem quer criar produtos, serviços, projetos, empresas e novas possibilidades de geração de valor.</div>
+          <div class="point">Possibilidade de conexões, parcerias e sociedades entre participantes, conforme interesses e projetos desenvolvidos.</div>
+        </div>
+        <div class="hero-cta">
+          <a class="btn" href="https://wa.me/5591980144854" target="_blank" rel="noopener">Quero falar agora</a>
+          <a class="btn-outline" href="#catalogo">Explorar áreas</a>
+        </div>
+      </div><aside class="glass hero-side reveal">
+    <div class="side-card">
+      <h3>Produtos</h3>
+      <p>Aprenda a perceber necessidades, transformar ideias em soluções e estruturar ofertas com valor de mercado.</p>
+    </div>
+    <div class="side-card">
+      <h3>Negócios</h3>
+      <p>Entenda como combinar conhecimento, oportunidade, posicionamento e execução para criar novos caminhos econômicos.</p>
+    </div>
+    <div class="side-card">
+      <h3>Mercados</h3>
+      <p>Desenvolva visão para enxergar nichos, dores, lacunas e possibilidades que formações isoladas geralmente não mostram.</p>
+    </div>
+  </aside>
+</div>
+
+  </header>  <div class="container">
+    <div class="ticker reveal">
+      <div class="ticker-track">
+        <span>Medicina Interdisciplinar</span>
+        <span>Engenharia Interdisciplinar</span>
+        <span>I.A Interdisciplinar</span>
+        <span>Ciência da Computação Interdisciplinar</span>
+        <span>Ciência Ambiental Interdisciplinar</span>
+        <span>Economia Interdisciplinar</span>
+        <span>Direito Interdisciplinar</span>
+        <span>Administração Interdisciplinar</span>
+        <span>Agronomia Interdisciplinar</span>
+        <span>Biotecnologia Interdisciplinar</span>
+        <span>Medicina Veterinária Interdisciplinar</span>
+        <span>Criação de Produtos</span>
+        <span>Novos Negócios</span>
+        <span>Novos Mercados</span>
+      </div>
+    </div>
+  </div>  <section class="section" id="diferencial">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Uma formação para quem quer construir, vender, lançar e criar novas possibilidades</h2>
+        <p>A NexialBusiness foi desenhada para quem não quer apenas aprender sobre uma área, mas usar áreas diferentes para criar produtos, serviços, negócios e novos mercados. É uma formação para empreendedores, inovadores, profissionais e alunos que querem transformar repertório em criação de valor.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <div class="feature-index">01</div>
+          <h3>Visão interdisciplinar de mercado</h3>
+          <p>Você aprende a olhar uma área por dentro e por fora, conectando saberes diferentes para encontrar oportunidades de criação.</p>
+          <div class="tag-row">
+            <span class="tag">Produtos</span>
+            <span class="tag">Serviços</span>
+            <span class="tag">Negócios</span>
+            <span class="tag">Mercados</span>
+          </div>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-index">02</div>
+          <h3>Método de inovação aplicada</h3>
+          <p>Um processo para identificar dores, lacunas, desejos, tecnologias e combinações que podem originar ofertas de alto valor.</p>
+          <div class="tag-row">
+            <span class="tag">Inovação</span>
+            <span class="tag">Oportunidade</span>
+            <span class="tag">Oferta</span>
+            <span class="tag">Valor</span>
+          </div>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-index">03</div>
+          <h3>Criação orientada a negócio</h3>
+          <p>O foco é desenvolver capacidade de criar soluções, modelos, projetos e negócios com potencial de geração de valor.</p>
+          <div class="tag-row">
+            <span class="tag">Projetos</span>
+            <span class="tag">Empresas</span>
+            <span class="tag">Parcerias</span>
+            <span class="tag">Sociedades</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>  <section class="section">
+    <div class="container story-grid">
+      <div class="story-card reveal">
+        <h3>Mais que conteúdo</h3>
+        <p>Você entra em uma formação voltada à construção de oportunidades. Não é apenas consumir aulas: é aprender a transformar repertório em produtos, negócios e caminhos de valor.</p>
+      </div>
+      <div class="story-card reveal">
+        <h3>Ambiente para conexões</h3>
+        <p>Ao longo da formação, podem surgir ideias, projetos, parcerias, empresas e sociedades entre participantes, conforme interesses, maturidade e oportunidades construídas.</p>
+      </div>
+    </div>
+  </section>  <section class="section" id="catalogo">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Escolha sua área de entrada</h2>
+        <p>Você começa por uma área, mas aprende a criar além dela. Cada trilha funciona como porta de entrada para combinar conhecimento, mercado e inovação.</p>
+      </div>
+      <div class="catalog-grid">
+        <div class="catalog-card reveal">
+          <h3>Medicina Interdisciplinar — Business</h3>
+          <p><strong>Criação de Produtos, Serviços e Negócios em Saúde</strong></p>
+          <ul>
+            <li>Produtos e serviços para saúde</li>
+            <li>Economia das doenças e novas oportunidades</li>
+            <li>Saúde, tecnologia e novos modelos de negócio</li>
+            <li>Possibilidade de projetos em educação, clínica, tecnologia e cuidado</li>
+          </ul>
+        </div><div class="catalog-card reveal">
+      <h3>Engenharia Interdisciplinar — Business</h3>
+      <p><strong>Criação de Produtos, Sistemas e Negócios Tecnológicos</strong></p>
+      <ul>
+        <li>Produtos físicos, sistemas e soluções técnicas</li>
+        <li>Engenharia aplicada a mercado e inovação</li>
+        <li>Materiais, automação, controle e novos usos</li>
+        <li>Possibilidade de negócios em tecnologia, indústria e serviços</li>
+      </ul>
+    </div>
+
+    <div class="catalog-card reveal">
+      <h3>I.A Interdisciplinar — Business</h3>
+      <p><strong>Criação de Soluções, Automação e Negócios com Inteligência Artificial</strong></p>
+      <ul>
+        <li>I.A aplicada a produtos e serviços</li>
+        <li>Automação de processos e novos modelos de renda</li>
+        <li>Criação de ofertas digitais e sistemas inteligentes</li>
+        <li>Possibilidade de negócios escaláveis com tecnologia</li>
+      </ul>
+    </div>
+
+    <div class="catalog-card reveal">
+      <h3>Ciência da Computação Interdisciplinar — Business</h3>
+      <p><strong>Criação de Plataformas, Sistemas e Produtos Digitais</strong></p>
+      <ul>
+        <li>Produtos digitais e sistemas online</li>
+        <li>Arquitetura de soluções e plataformas</li>
+        <li>Tecnologia aplicada à criação de valor</li>
+        <li>Possibilidade de SaaS, marketplaces e serviços digitais</li>
+      </ul>
+    </div>
+
+    <div class="catalog-card reveal">
+      <h3>Economia Interdisciplinar — Business</h3>
+      <p><strong>Criação de Modelos de Negócio, Mercados e Estratégias de Valor</strong></p>
+      <ul>
+        <li>Leitura de mercado e oportunidade</li>
+        <li>Assimetria de informação aplicada a negócios</li>
+        <li>Modelos econômicos e novas ofertas</li>
+        <li>Possibilidade de negócios baseados em dados, educação e estratégia</li>
+      </ul>
+    </div>
+
+    <div class="catalog-card reveal">
+      <h3>Direito Interdisciplinar — Business</h3>
+      <p><strong>Criação de Soluções, Serviços e Negócios Jurídico-Estratégicos</strong></p>
+      <ul>
+        <li>Direito preventivo e anti-contenda</li>
+        <li>Serviços jurídicos estruturados como produto</li>
+        <li>Negócios ligados a risco, conflito e governança</li>
+        <li>Possibilidade de soluções institucionais, educacionais e empresariais</li>
+      </ul>
+    </div>
+
+    <div class="catalog-card reveal">
+      <h3>Agronomia Interdisciplinar — Business</h3>
+      <p><strong>Criação de Produtos, Serviços e Negócios no Agro</strong></p>
+      <ul>
+        <li>Agro, produção, tecnologia e mercado</li>
+        <li>Novas soluções para produção vegetal e animal</li>
+        <li>Integração com biotecnologia, engenharia e dados</li>
+        <li>Possibilidade de negócios produtivos, educacionais e tecnológicos</li>
+      </ul>
+    </div>
+
+    <div class="catalog-card reveal">
+      <h3>Biotecnologia Interdisciplinar — Business</h3>
+      <p><strong>Criação de Produtos Bioinovadores e Novos Mercados</strong></p>
+      <ul>
+        <li>Biotecnologia aplicada a saúde, agro e indústria</li>
+        <li>Produtos bioativos, biomateriais e novas soluções</li>
+        <li>Integração com medicina, engenharia e negócios</li>
+        <li>Possibilidade de novos mercados técnicos e científicos</li>
+      </ul>
+    </div>
+
+    <div class="catalog-card reveal">
+      <h3>Administração Interdisciplinar — Business</h3>
+      <p><strong>Criação, Gestão e Expansão de Negócios</strong></p>
+      <ul>
+        <li>Modelagem de negócios e ofertas</li>
+        <li>Estratégia, posicionamento e canais</li>
+        <li>Operação, crescimento e diferenciação</li>
+        <li>Possibilidade de expansão com produtos, serviços e parcerias</li>
+      </ul>
+    </div>
+
+    <div class="catalog-card reveal">
+      <h3>Ciência Ambiental Interdisciplinar — Business</h3>
+      <p><strong>Criação de Soluções, Serviços e Negócios Sustentáveis</strong></p>
+      <ul>
+        <li>Ambiente, sustentabilidade e mercado</li>
+        <li>Produtos e serviços com valor socioambiental</li>
+        <li>Integração com economia, tecnologia e gestão</li>
+        <li>Possibilidade de novos negócios em sustentabilidade e impacto</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+  </section>  <section class="section" id="metodo">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>O Método NexialBusiness</h2>
+        <p>A maioria aprende uma área. A NexialBusiness ensina a usar áreas para criar valor. Você aprende a conectar conhecimentos, encontrar lacunas, enxergar dores, montar ofertas e desenvolver caminhos de negócio.</p>
+      </div>
+      <div class="method-banner reveal"><strong>Não é sobre saber mais por saber.</strong> É sobre transformar conhecimento em produto, oportunidade e negócio.</div>
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <div class="feature-index">01</div>
+          <h3>Identificação de oportunidades</h3>
+          <p>Você aprende a observar dores, demandas, gargalos, tendências e lacunas que podem se transformar em ofertas.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-index">02</div>
+          <h3>Combinação de áreas</h3>
+          <p>A formação organiza conexões entre áreas para gerar ideias de produtos, serviços e negócios com maior diferenciação.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-index">03</div>
+          <h3>Arquitetura de valor</h3>
+          <p>O foco é criar soluções com proposta clara, público definido, valor percebido e possibilidade de mercado.</p>
+        </div>
+      </div>
+    </div>
+  </section>  <section class="section" id="precos">
+    <div class="container pricing-wrap">
+      <div class="pricing-card reveal">
+        <h3>Formação completa — NexialBusiness</h3>
+        <p class="price-note">Uma formação para criação de produtos, negócios, projetos e novos mercados. O valor de ingresso corresponde a <strong>uma trilha (uma área)</strong>, escolhida no momento da entrada.</p>
+        <div class="price-main">
+          <div class="small">12x de</div>
+          <div class="big">R$ 597</div>
+        </div>
+        <p class="price-note">Ou R$ 5.900 à vista. O parcelamento pode ser realizado em <strong>12x</strong> ou até <strong>18x</strong>, conforme a modalidade de ingresso. O acesso liberado refere-se à trilha selecionada no momento da matrícula.</p>
+        <ul class="price-list">
+          <li>Formação interdisciplinar online</li>
+          <li>Área de entrada escolhida pelo aluno</li>
+          <li>Núcleo de criação, inovação e negócios</li>
+          <li>Desenvolvimento de visão empreendedora e interdisciplinar</li>
+          <li>Possibilidade de conexões, projetos, parcerias e sociedades entre participantes</li>
+        </ul>
+        <div class="hero-cta">
+          <a class="btn" href="https://wa.me/5591980144854" target="_blank" rel="noopener">Quero entrar agora</a>
+          <a class="btn-outline" href="https://nexialbusiness.com" target="_blank" rel="noopener">nexialbusiness.com</a>
+        </div>
+      </div>
+      <div class="pricing-card reveal">
+        <h3>Para quem é</h3>
+        <ul class="price-list">
+          <li>Empreendedores que querem criar novos produtos e negócios</li>
+          <li>Profissionais que querem transformar conhecimento em oportunidade</li>
+          <li>Universitários que querem ir além da formação tradicional</li>
+          <li>Inovadores que querem conectar áreas e criar valor</li>
+          <li>Pessoas com ideias que precisam de direção, estrutura e mercado</li>
+        </ul>
+        <div class="disclaimer">A NexialBusiness é uma formação educacional interdisciplinar. Não substitui graduação, especialização, habilitação legal ou títulos formais de exercício profissional em áreas regulamentadas.</div>
+      </div>
+    </div>
+  </section>  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Perguntas frequentes</h2>
+        <p>As dúvidas mais importantes para quem quer entender a proposta, o posicionamento e a lógica empreendedora da NexialBusiness.</p>
+      </div>
+      <div class="faq">
+        <div class="faq-item reveal">
+          <h4>Preciso já ter empresa para entrar?</h4>
+          <p>Não. A formação é voltada tanto para quem já empreende quanto para quem deseja desenvolver capacidade de criação de produtos, serviços e negócios.</p>
+        </div>
+        <div class="faq-item reveal">
+          <h4>Preciso ser da área escolhida?</h4>
+          <p>Não necessariamente. A proposta é justamente permitir que pessoas de diferentes formações aprendam a conectar áreas e enxergar oportunidades além das fronteiras tradicionais.</p>
+        </div>
+        <div class="faq-item reveal">
+          <h4>Podem surgir empresas ou sociedades durante o curso?</h4>
+          <p>Podem surgir projetos, parcerias e articulações entre participantes, conforme interesses, afinidades e oportunidades desenvolvidas ao longo da formação.</p>
+        </div>
+        <div class="faq-item reveal">
+          <h4>Por que a NexialBusiness é diferente de um curso comum?</h4>
+          <p>Porque não se limita a transmitir conteúdo. Ela organiza uma forma de conectar conhecimento, mercado e oportunidade para criação de valor.</p>
+        </div>
+      </div>
+    </div>
+  </section>  <section class="section">
+    <div class="container">
+      <div class="cta-panel reveal">
+        <h2>Você não precisa esperar autorização para criar.<br><span class="title-accent">Precisa aprender a conectar conhecimento, oportunidade e mercado.</span></h2>
+        <p>Se você quer desenvolver produtos, serviços, negócios e novos mercados a partir de uma formação interdisciplinar, a NexialBusiness foi desenhada para você.</p>
+        <div class="cta-actions">
+          <a class="btn" href="https://wa.me/5591980144854" target="_blank" rel="noopener">Falar no WhatsApp</a>
+          <a class="btn-outline" href="https://nexialbusiness.com" target="_blank" rel="noopener">Acessar nexialbusiness.com</a>
+        </div>
+      </div>
+    </div>
+  </section>  <footer>
+    <div class="container">
+      <strong>NEXIALBUSINESS</strong><br>
+      Criação de Produtos e Negócios<br><br>
+      Site: nexialbusiness.com<br>
+      WhatsApp: (91) 98014-4854
+    </div>
+  </footer>  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+  </script></body>
+</html>
